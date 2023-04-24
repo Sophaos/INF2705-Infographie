@@ -1,0 +1,13 @@
+    q:  Quitter l'application
+    v:  Recharger les nuanceurs
+    g:  Permuter l'affichage en fil de fer ou plein
+    ESPACE:  Mettre en pause ou reprendre l'animation
+    MOINS:  Incrémenter la distance de la caméra
+    PLUS:  Décrémenter la distance de la caméra
+    0:  Remettre les angles de la caméra à 0
+    GAUCHE:  Augmenter theta
+    DROITE:  Décrémenter theta
+    HAUT:  Augmenter phi
+    BAS:   Décrémenter phi
+    r:  réinitiliaser la caméra
+    n:  modifier le nombre de vues

@@ -1,0 +1,38 @@
+﻿Indice: pour bien répondre à ces deux questions, essayez de voir si votre réponse fonctionne dans votre application. 
+(Pour chacune, ce ne sont que quelques lignes à modifier dans le nuanceur!)
+
+
+Q1: Dans la partie 1, des points de taille fixe sont affichés à l'écran. Leur taille est donnée par la variable gl_PointSize.
+    i) Comment faire pour que la taille d'un point varie de façon inverse à sa distance du plan avant du volume de visualisation, 
+	   c'est-à-dire qu'il soit plus gros lorsqu'il est plus près de la caméra ?
+	   
+		   Dans l'implémentation de notre nuanceur de géométrie, on divisera le facteur de grandissement d'un point en divisant le gl_PointSize
+		   avec la position en z du point, dont sa profondeur. On vous montreras notre ligne de code dans la sous-question suivante.
+	   
+    ii) Donnez l'énoncé GLSL que vous utiliseriez pour implanter ceci.
+		Dans notre nuanceur de géométrie, nous ajouterons ce:
+		
+			float facteur = gl_PointSize / 20.0;
+			facteur /= (matrProj * gl_in[0].gl_Position).z;
+			
+			Ce facteur sera applique ensuite sur le gl_Position. 
+			Nous avons laissé cette implémentation dans notre TP puisque l'apparence des lutins en profondir est réaliste et très plaisant à voir.
+
+
+Q2: Pour afficher une étincelle qui tourne sur elle-même, on a appliqué une matrice de rotation sur les quatre sommets.
+    i) Pourrait-on faire tourner l'étincelle en appliquant la même matrice de rotation 
+	   sur les coordonnées de texture plutôt que sur les coordonnées des sommets?
+	   
+	   Oui, nous avons justement utiliser cette méthode pour effectuer la rotation. 
+	   C'est aussi beaucoup plus évident pour nous de visualiser les manipulations sur l'image de texture.
+	   
+    ii) Quel problème observerions-nous alors et comment devrait-il être corrigé?
+	
+		Puisque c'est les coordonnées de texture qui changent, alors les coordonnées des sommets n'effectueront pas de
+		rotation. En conséquence, les lutins seront toujours un carré et c'est la texture qui rotatera dans le carré.
+		Pour remédier à cette problématique, il faudrait coordonner les positions des sommets avec des rotations.
+		
+
+    Afin de facilement répondre à cette question, vous pouvez remplacer (temporairement!) l'image de l'étincelle de ce TP par l'image de l'échiquier du TP3.  
+	Si vous appliquez ensuite la matrice de rotation sur les coordonnées de texture plutôt que sur les coordonnées des sommets, 
+	vous pourrez alors très bien voir ce qui se passe.

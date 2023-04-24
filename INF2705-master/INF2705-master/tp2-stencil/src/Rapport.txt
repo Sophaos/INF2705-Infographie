@@ -1,0 +1,42 @@
+﻿Q1: Dans le nuanceur de sommets, si on souhaite calculer la profondeur du
+    sommet dans le repère de la caméra, on peut utiliser cette formule :
+
+    « out float profondeur = -( matrVisu * matrModel * Vertex ).z; »
+
+    Pourquoi doit-on inverser le signe du résultat calculé ?
+
+    L'origine se situe à la position de la caméra. 
+    La direction des z positifs d'une caméra se dirige vers l'opposé de son champs de vision, donc elle pointe vers la caméra. 
+    Alors, nous obtenons une profondeur négative. 
+	Il est alors important d'inverser le signe pour obtenir la profondeur postive.
+
+Q2: Lorsqu'on calcule la distance à la caméra pour faire un effet de
+    profondeur dans le nuanceur de fragments, que se passe-t-il si on
+    remplace
+
+    « d = gl_FragCoord.z / gl_FragCoord.w; »
+
+    par seulement l'utilisation de z ou de w avec
+
+    « d = gl_FragCoord.z; » ou
+    « d = gl_FragCoord.w; » ?
+
+    Comment expliquez-vous les comportements observés dans un cas ou l'autre ?
+    Quel est l'intérêt de ce comportement ?
+
+
+    Si on utilise le cas où « d = gl_FragCoord.z; » ou « d = gl_FragCoord.w; », 
+    la distance ne sera pas définie entre 30.0 et 50.0 qui sont les valeurs limites à l'atténuation.
+    Afin de bien produire l'effet de profondeur, nous utilisons la fonction «smoothstep» qui prend justement la
+    valeur de «d» qui représente la distance entre le sommet et la caméra. Cette valeur doit être
+    comprise entre 30.0 et 50.0. Sans cette contrainte, l'effet de profondeur ne sera pas atteint. 
+
+    En utilisant « d = gl_FragCoord.z / gl_FragCoord.w; », on assure une profondeur proportionnelle à la
+    distance de la caméra pour chaque sommet qui réside dans le champs de projection.
+    Donc, la valeur devrait être comprise entre 30.0 et 50.0.
+
+    Finalement, dans notre nuanceur de fragment, nous pouvons interpoler avec la fonction «smoothstep»
+    pour trouver un facteur qui sera appliqué sur la couleur pour justement atténuer.
+    
+    
+

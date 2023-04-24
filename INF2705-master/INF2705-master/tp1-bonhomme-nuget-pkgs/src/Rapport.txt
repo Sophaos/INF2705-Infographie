@@ -1,0 +1,44 @@
+﻿Q1: Supposons que les coordonnées du modèle soient exprimées dans un système
+    de coordonnées « main gauche » (au lieu du l'habituel « main droite »).
+    Comment devrait-on alors modifier la matrice 4x4 servant à la rotation
+    afin de préserver le même effet visuel d'une rotation positive ?  Quelle
+    serait la nouvelle matrice pour une rotation autour de l'axe des Z ?
+
+R1  Pour préserver le même effet visuel d'une rotation positive pour une matrice de rotation 4x4 en utilisant le système de coordonnées « main gauche », 
+    il faut utiliser l'angle négatif de rotation pour simuler une rotation en coordonnées « main gauche ».
+	Dans cas, l'angle phi(coordonnées Main Gauche) est égale à -theta (coordonnées Main Droite). 
+	Donc, nous voulons obtenir une matrice équivalent à celui en coordonnées Main Droite. 
+	La seule chose qui change est le calcul de sinus :
+
+    Nous obtenons alors la matrice suivante:
+  
+	| Cos(phi)  -Sin(phi)  0  0 |				| Cos( θ)   Sin(θ) 0  0 |
+	| Sin(phi)   Cos(phi)  0  0 |		=		|-Sin( θ)   Cos(θ) 0  0 |
+	|  0        0          1  0 |				|  0        0      1  0 |
+	|  0        0          0  1 |			    |  0        0      0  1 |
+
+Q2: Dans ce TP, on peut déplacer le bonhomme avec les flèches du clavier ou
+    encore lancer un déplacement « automatique » avec la touche 'espace'.
+    le bonhomme se déplace alors dans différentes directions, entre en
+    collision avec les parois du cube qui la contient et son mouvement (son
+    déplacement) change alors de direction.
+
+    Lorsque le bonhomme se déplace ainsi, comment peut-on toujours montrer
+    le bonhomme se déplaçant en regardant vers l'avant, c'est-à-dire dans le
+    sens de son mouvement. Comment faire en sorte que la tête (et le corps)
+    soit toujours dirigée dans le sens de son mouvement ?
+    Décrivez (avec assez de détails) comment vous implanteriez ceci dans ce TP.
+
+    
+	
+R2 	Il suffit seulement de trouver la direction du mouvement du bonhomme avec la vitesse et le sens. 
+	De cette manière, nous pouvons calculer l'angle de rotation du bonhomme.
+	En faisant un arctan de la division de la nouvelle position en y sur la position en x du bonhomme, on obtient l'angle de rotation.
+	Les prochaines lignes de code permettent de calculer tout cela. Il faut les ajouter à la fin de la fonction calculerPhysique()
+	
+	% glm::vec2 directionBonhomme = { sens[0] * vitesse.x, sens[1] * vitesse.y };
+	% angleCorps = glm::degrees(glm::atan(directionBonhomme.y/ directionBonhomme.x));
+
+	Il faut aussi supprimer la ligne suivante dans cette fonction, car la varialbe angleCorps sera déjà affecté : 
+	
+	% angleCorps += 0.5;

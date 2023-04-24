@@ -1,0 +1,3 @@
+    q:  Quitter l'application
+    v:  Recharger les fichiers des nuanceurs et recréer le programme
+    m:  Choisir le modèle affiché: cube, théière, tore, sphère, dodécaèdre, icosahèdre

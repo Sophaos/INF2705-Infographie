@@ -1,0 +1,13 @@
+    q:  Quitter l'application
+    x:  Activer/désactiver l'affichage des axes
+    v:  Recharger les nuanceurs
+    g:  Permuter l'affichage en fil de fer ou plein
+    ESPACE:  Mettre en pause ou reprendre l'animation
+    m:  Afficher ou non les murs
+    t:  Afficher ou non le cube
+    c:  Utiliser ou non un plan de coupe
+    s:  Utiliser ou non le tampon de stencil
+    l:  Limiter ou non la rotation de la caméra
+    0:  Remise de l'angle de la caméra à zéro
+    DROITE:  Incrémenter l'angle de la caméra
+    GAUCHE:  Décrementer l'angle de la caméra

@@ -1,0 +1,4 @@
+    q:  Quitter l'application
+    v:  Recharger les nuanceurs
+    s:  Afficher les couleurs de sélection temporairement
+    g:  Permuter l'affichage en fil de fer ou plein
